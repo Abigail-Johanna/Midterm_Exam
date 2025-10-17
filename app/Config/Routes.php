@@ -43,6 +43,8 @@ $routes->group('teacher', ['filter' => 'roleauth'], function($routes) {
 
 $routes->group('admin', ['filter' => 'roleauth'], function($routes) {
     $routes->get('dashboard', 'Admin::dashboard');
+    $routes->get('manage-announcements', 'Admin::manageAnnouncements');
+    $routes->match(['get', 'post'], 'create-announcement', 'Admin::createAnnouncement');
 });
 
 

@@ -74,8 +74,14 @@
             </div>
 
             <div class="mt-4">
-                <a href="<?= base_url('/announcements') ?>" class="btn btn-primary">
-                    <i class="fas fa-bullhorn"></i> View Announcements
+                <a href="<?= base_url('/admin/manage-announcements') ?>" class="btn btn-primary">
+                    <i class="fas fa-bullhorn"></i> Manage Announcements
+                </a>
+                <a href="<?= base_url('/admin/create-announcement') ?>" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Create Announcement
+                </a>
+                <a href="<?= base_url('/announcements') ?>" class="btn btn-info">
+                    <i class="fas fa-eye"></i> View All Announcements
                 </a>
                 <a href="<?= base_url('/auth/logout') ?>" class="btn btn-outline-secondary">
                     <i class="fas fa-sign-out-alt"></i> Logout

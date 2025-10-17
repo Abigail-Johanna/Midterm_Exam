@@ -13,7 +13,8 @@ class AnnouncementModel extends Model
     protected $useSoftDeletes = false;
     protected $allowedFields = [
         'title',
-        'content'
+        'content',
+        'target_role'
     ];
     protected $useTimestamps = true;
     protected $createdField = 'created_at';
@@ -22,7 +23,8 @@ class AnnouncementModel extends Model
     // Validation rules
     protected $validationRules = [
         'title' => 'required|min_length[3]|max_length[255]',
-        'content' => 'required|min_length[10]'
+        'content' => 'required|min_length[10]',
+        'target_role' => 'required|in_list[all,student,teacher,admin]'
     ];
 
     protected $validationMessages = [
@@ -51,5 +53,24 @@ class AnnouncementModel extends Model
     public function getRecentAnnouncements($limit = 5)
     {
         return $this->orderBy('created_at', 'DESC')->limit($limit)->find();
+    }
+
+    /**
+     * Get announcements for specific role
+     */
+    public function getAnnouncementsByRole($role)
+    {
+        return $this->where('target_role', $role)
+                   ->orWhere('target_role', 'all')
+                   ->orderBy('created_at', 'DESC')
+                   ->findAll();
+    }
+
+    /**
+     * Get all announcements for admin management
+     */
+    public function getAllAnnouncementsForAdmin()
+    {
+        return $this->orderBy('created_at', 'DESC')->findAll();
     }
 }

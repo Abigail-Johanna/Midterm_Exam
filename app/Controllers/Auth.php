@@ -171,6 +171,10 @@ class Auth extends BaseController
                     $enrolledIds = array_column($enrolledCourses, 'id');
                     $courses = array_filter($courses, fn($c) => !in_array($c['id'], $enrolledIds));
                 }
+
+                // Get student-specific announcements
+                $announcementModel = new \App\Models\AnnouncementModel();
+                $announcements = $announcementModel->getAnnouncementsByRole('student');
             }
         } catch (\Throwable $e) {
             log_message('error', 'Dashboard error: ' . $e->getMessage());
@@ -188,6 +192,7 @@ class Auth extends BaseController
             'enrolledCourses'  => $enrolledCourses,
             'stats'            => $stats,
             'deadlines'        => $deadlines,
+            'announcements'    => $announcements ?? [],
         ];
 
         return view('auth/dashboard', $data);

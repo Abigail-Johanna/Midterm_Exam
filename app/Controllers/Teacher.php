@@ -2,8 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Models\AnnouncementModel;
+
 class Teacher extends BaseController
 {
+    protected $announcementModel;
+
+    public function __construct()
+    {
+        $this->announcementModel = new AnnouncementModel();
+    }
     /**
      * Teacher Dashboard
      */
@@ -20,10 +28,14 @@ class Teacher extends BaseController
             return redirect()->to('/announcements')->with('error', 'Access Denied: Insufficient Permissions');
         }
 
+        // Get teacher-specific announcements
+        $announcements = $this->announcementModel->getAnnouncementsByRole('teacher');
+
         $data = [
             'title' => 'Teacher Dashboard',
             'user_name' => session()->get('user_name'),
-            'user_role' => $userRole
+            'user_role' => $userRole,
+            'announcements' => $announcements
         ];
 
         return view('teacher_dashboard', $data);

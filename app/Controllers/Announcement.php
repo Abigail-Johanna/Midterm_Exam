@@ -14,7 +14,7 @@ class Announcement extends BaseController
     }
 
     /**
-     * Display all announcements
+     * Display role-specific announcements
      */
     public function index()
     {
@@ -23,14 +23,16 @@ class Announcement extends BaseController
             return redirect()->to('/auth/login')->with('error', 'Please login first.');
         }
 
-        // Fetch all announcements ordered by created_at descending (newest first)
-        $announcements = $this->announcementModel->orderBy('created_at', 'DESC')->findAll();
+        $userRole = session()->get('user_role');
+        
+        // Fetch announcements specific to user role
+        $announcements = $this->announcementModel->getAnnouncementsByRole($userRole);
 
         $data = [
             'title' => 'Announcements',
             'announcements' => $announcements,
             'user_name' => session()->get('user_name'),
-            'user_role' => session()->get('user_role')
+            'user_role' => $userRole
         ];
 
         return view('announcements', $data);
