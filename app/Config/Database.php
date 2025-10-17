@@ -29,7 +29,7 @@ class Database extends Config
         'hostname' => 'localhost',
         'username' => 'root',        
         'password' => '',           
-        'database' => 'lms_ruales',
+        'database' => 'student_portal',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
