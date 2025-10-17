@@ -80,16 +80,13 @@
         Welcome to your student dashboard! You can view and enroll in available courses below.
     </div>
 
-    <!-- ✅ CSRF Token -->
     <div id="csrfToken" style="display:none;">
         <?= csrf_field() ?>
     </div>
 
-    <!-- ✅ Alert Box -->
     <div id="alertBox" class="alert d-none mt-3"></div>
 
     <div class="row">
-        <!-- ✅ Enrolled Courses -->
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-header fw-bold">My Enrolled Courses</div>
@@ -110,7 +107,6 @@
             </div>
         </div>
 
-        <!-- ✅ Available Courses -->
         <div class="col-md-6 mb-4">
             <div class="card">
                 <div class="card-header fw-bold">Available Courses</div>
@@ -135,10 +131,10 @@
         </div>
     </div>
 
-    <!-- ✅ jQuery -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- ✅ AJAX Enroll -->
+    <!-- AJAX Enroll -->
     <script>
     $(document).ready(function() {
         $('.enroll-btn').click(function() {
